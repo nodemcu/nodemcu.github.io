@@ -5,7 +5,7 @@
 <xmp theme = "a">
 # **nodeMcu API Instruction** #
 
-###version 0.9.4 build 2014-12-30
+###version 0.9.5 build 2015-01-08
 
 
 <a id="index"></a>
@@ -117,6 +117,19 @@
 
 <a id="change_log"></a>
 ###change log: 
+2015-01-08<br />
+ fix net.socket:send() issue when multi sends are called. <br />
+**NOTE:** if data length is bigger than 1460, send next packet AFTER "sent" callback is called.<br />
+ fix file.read() api, take 0xFF as a regular byte, not EOF.<br />
+ pre_build/latest/nodemcu_512k_latest.bin is removed. use pre_build/latest/nodemcu_latest.bin instead.<br />
+
+2015-01-07<br />
+ retrive more ram back.<br />
+ add api file.format() to rebuild file system.<br />
+ rename "NodeMcu" to "NodeMCU" in firmware.<br />
+ add some check for file system op.<br />
+
+
 2014-12-30<br />
 modify uart.on api, when run_input set to 0, uart.on now can read raw data from uart.<br />
 serial input now accept non-ascii chars.<br />
