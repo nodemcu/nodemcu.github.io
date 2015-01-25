@@ -13,6 +13,7 @@
 [Change Log](#change_log)<br />
 [New GPIO Map](#new_gpio_map)<br />
 [Old GPIO Map](#old_gpio_map)<br />
+###node module
 [node.restart()](#nm_restart)<br />
 [node.dsleep()](#nm_dsleep)<br />
 [node.info()](#nm_info)<br />
@@ -23,6 +24,7 @@
 [node.led()](#nm_led)<br />
 [node.input()](#nm_input)<br />
 [node.output()](#nm_output)<br />
+###file module
 [file.remove()](#fl_remove)<br />
 [file.open()](#fl_open)<br />
 [file.close()](#fl_close)<br />
@@ -34,11 +36,13 @@
 [file.seek()](#fl_seek)<br />
 [file.list()](#fl_list)<br />
 [file.format()](#fl_format)<br />
+###wifi module
 [wifi.setmode(mode)](#wf_setmode)<br />
 [wifi.getmode(mode)](#wf_getmode)<br />
 [wifi.startsmart()](#wf_startsmart)<br />
 [wifi.stopsmart()](#wf_stopsmart)<br />
 [wifi.sleeptype()](#wf_sleeptype)<br />
+###wifi.sta sub-module
 [wifi.sta.config()](#ws_config)<br />
 [wifi.sta.connect()](#ws_connect)<br />
 [wifi.sta.disconnect()](#ws_disconnect)<br />
@@ -50,22 +54,26 @@
 [wifi.sta.getap()](#ws_getap)<br />
 [wifi.sta.status()](#ws_status)<br />
 [wifi.sta.getbroadcast()](#ws_getbroadcast)<br />
+###wifi.ap sub-module
 [wifi.ap.config()](#wa_config)<br />
 [wifi.ap.getip()](#wa_getip)<br />
 [wifi.ap.setip()](#wa_setip)<br />
 [wifi.ap.getmac()](#wa_getmac)<br />
 [wifi.ap.setmac()](#wa_setmac)<br />
 [wifi.ap.getbroadcast()](#wa_getbroadcast)<br />
+###timer module
 [tmr.delay()](#tm_delay)<br />
 [tmr.now()](#tm_now)<br />
 [tmr.alarm()](#tm_alarm)<br />
 [tmr.stop()](#tm_stop)<br />
 [tmr.wdclr()](#tm_wdclr)<br />
 [tmr.time()](#tm_time)<br />
+###gpio module
 [gpio.mode()](#io_mode)<br />
 [gpio.read()](#io_read)<br />
 [gpio.write()](#io_write)<br />
 [gpio.trig()](#io_trig)<br />
+###pwm module
 [pwm.setup()](#pw_setup)<br />
 [pwm.close()](#pw_close)<br />
 [pwm.start()](#pw_start)<br />
@@ -74,25 +82,32 @@
 [pwm.getclock()](#pw_getclock)<br />
 [pwm.setduty()](#pw_setduty)<br />
 [pwm.getduty()](#pw_getduty)<br />
+###net module
 [net.createServer()](#nt_createServer)<br />
 [net.createConnection()](#nt_createConnection)<br />
-[listen()](#ns_listen)<br />
-[close()](#ns_close)<br />
-[connect()](#nk_connect)<br />
-[send()](#nk_send)<br />
-[on()](#nk_on)<br />
-[close()](#nk_close)<br />
-[dns()](#nk_dns)<br />
+###net server sub-module
+[server:listen()](#ns_listen)<br />
+[server:close()](#ns_close)<br />
+###net socket sub-module
+[socket:connect()](#nk_connect)<br />
+[socket:send()](#nk_send)<br />
+[socket:on()](#nk_on)<br />
+[socket:close()](#nk_close)<br />
+[socket:dns()](#nk_dns)<br />
+###i2c module
 [i2c.setup()](#ic_setup)<br />
 [i2c.start()](#ic_start)<br />
 [i2c.stop()](#ic_stop)<br />
 [i2c.address()](#ic_address)<br />
 [i2c.write()](#ic_write)<br />
 [i2c.read()](#ic_read)<br />
+###adc module
 [adc.read()](#adc_read)<br />
+###uart module
 [uart.setup()](#uart_setup)<br />
 [uart.on()](#uart_on)<br />
 [uart.write()](#uart_write)<br />
+###1-wire module
 [ow.setup()](#ow_setup)<br />
 [ow.reset()](#ow_reset)<br />
 [ow.skip()](#ow_skip)<br />
@@ -108,6 +123,7 @@
 [ow.crc8()](#ow_crc8)<br />
 [ow.check_crc16()](#ow_check_crc16)<br />
 [ow.crc16()](#ow_crc16)<br />
+###bit module
 [bit.bnot()](#bit_bnot)<br />
 [bit.band()](#bit_band)<br />
 [bit.bor()](#bit_bor)<br />
@@ -120,6 +136,7 @@
 [bit.clear()](#bit_clear)<br />
 [bit.isset()](#bit_isset)<br />
 [bit.isclear()](#bit_isclear)<br />
+###spi module
 [spi.setup()](#spi_setup)<br />
 [spi.send()](#spi_send)<br />
 [spi.recv()](#spi_recv)<br />
