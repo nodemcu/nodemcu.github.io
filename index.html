@@ -5,7 +5,7 @@
 <xmp theme = "a">
 # **NodeMCU API Instruction** #
 
-###version 0.9.5 build 2015-01-08
+###version 0.9.5 build 2015-01-24
 
 
 <a id="index"></a>
@@ -15,7 +15,9 @@
 [Old GPIO Map](#old_gpio_map)<br />
 [node.restart()](#nm_restart)<br />
 [node.dsleep()](#nm_dsleep)<br />
+[node.info()](#nm_info)<br />
 [node.chipid()](#nm_chipid)<br />
+[node.flashid()](#nm_flashid)<br />
 [node.heap()](#nm_heap)<br />
 [node.key()](#nm_key)<br />
 [node.led()](#nm_led)<br />
@@ -26,6 +28,7 @@
 [file.close()](#fl_close)<br />
 [file.readline()](#fl_readline)<br />
 [file.writeline()](#fl_writeline)<br />
+[file.read()](#fl_read)<br />
 [file.write()](#fl_write)<br />
 [file.flush()](#fl_flush)<br />
 [file.seek()](#fl_seek)<br />
@@ -35,22 +38,30 @@
 [wifi.getmode(mode)](#wf_getmode)<br />
 [wifi.startsmart()](#wf_startsmart)<br />
 [wifi.stopsmart()](#wf_stopsmart)<br />
+[wifi.sleeptype()](#wf_sleeptype)<br />
 [wifi.sta.config()](#ws_config)<br />
 [wifi.sta.connect()](#ws_connect)<br />
 [wifi.sta.disconnect()](#ws_disconnect)<br />
 [wifi.sta.autoconnect()](#ws_autoconnect)<br />
 [wifi.sta.getip()](#ws_getip)<br />
+[wifi.sta.setip()](#ws_setip)<br />
 [wifi.sta.getmac()](#ws_getmac)<br />
+[wifi.sta.setmac()](#ws_setmac)<br />
 [wifi.sta.getap()](#ws_getap)<br />
 [wifi.sta.status()](#ws_status)<br />
+[wifi.sta.getbroadcast()](#ws_getbroadcast)<br />
 [wifi.ap.config()](#wa_config)<br />
 [wifi.ap.getip()](#wa_getip)<br />
+[wifi.ap.setip()](#wa_setip)<br />
 [wifi.ap.getmac()](#wa_getmac)<br />
+[wifi.ap.setmac()](#wa_setmac)<br />
+[wifi.ap.getbroadcast()](#wa_getbroadcast)<br />
 [tmr.delay()](#tm_delay)<br />
 [tmr.now()](#tm_now)<br />
 [tmr.alarm()](#tm_alarm)<br />
 [tmr.stop()](#tm_stop)<br />
 [tmr.wdclr()](#tm_wdclr)<br />
+[tmr.time()](#tm_time)<br />
 [gpio.mode()](#io_mode)<br />
 [gpio.read()](#io_read)<br />
 [gpio.write()](#io_write)<br />
@@ -109,6 +120,9 @@
 [bit.clear()](#bit_clear)<br />
 [bit.isset()](#bit_isset)<br />
 [bit.isclear()](#bit_isclear)<br />
+[spi.setup()](#spi_setup)<br />
+[spi.send()](#spi_send)<br />
+[spi.recv()](#spi_recv)<br />
 
 
 **-**[Back to Index](#index)
@@ -117,6 +131,22 @@
 
 <a id="change_log"></a>
 ###change log: 
+2015-01-24<br />
+migrate to sdk 0.9.5 release.<br />
+tmr.time() now return second(not precise yet). <br />
+build pre_build bin.
+
+2015-01-23<br />
+merge mqtt branch to master.<br />
+build pre_build bin.
+
+2015-01-18<br />
+merge mqtt module to [new branch mqtt](https://github.com/nodemcu/nodemcu-firmware/tree/mqtt) from [https://github.com/tuanpmt/esp_mqtt](https://github.com/tuanpmt/esp_mqtt).<br />
+merge spi module from iabdalkader:spi. <br />
+fix #110,set local port to random in client mode.<br />
+modify gpio.read to NOT set pin to input mode automatic.<br />
+add PATH env with C:\MinGW\bin;C:\MinGW\msys\1.0\bin;C:\Python27 in eclipse project. resolve #103.
+
 2015-01-08<br />
  fix net.socket:send() issue when multi sends are called. <br />
 **NOTE:** if data length is bigger than 1460, send next packet AFTER "sent" callback is called.<br />
@@ -388,6 +418,31 @@ nil
 
 **-** [Back to Index](#index)
 
+<a id="nm_info"></a>
+## node.info()
+####Description
+return NodeMCU version, chipid, flashid, flash size, flash mode, flash speed.
+
+####Syntax
+node.info()
+
+####Parameters
+nil
+
+####Returns
+number: majorVer, minorVer, devVer, chipid, flashid, flashsize, flashmode, flashspeed.
+
+####Example
+
+```lua
+    majorVer, minorVer, devVer, chipid, flashid, flashsize, flashmode, flashspeed = node.info();
+    print("NodeMCU "..majorVer.."."..minorVer.."."..devVer)
+```
+
+####See also
+**-**   []()
+
+**-** [Back to Index](#index)
 
 <a id="nm_chipid"></a>
 ## node.chipid()
@@ -414,6 +469,30 @@ number:chip ID
 
 **-** [Back to Index](#index)
 
+<a id="nm_flashid"></a>
+## node.flashid()
+####Description
+return flashid ID
+
+####Syntax
+node.flashid()
+
+####Parameters
+nil
+
+####Returns
+number:flash ID
+
+####Example
+
+```lua
+    flashid = node.flashid();
+```
+
+####See also
+**-**   []()
+
+**-** [Back to Index](#index)
 
 <a id="nm_heap"></a>
 ## node.heap()
@@ -736,6 +815,42 @@ nil: there is error
 
 **-** [Back to Index](#index)
 
+<a id="fl_read"></a>
+## file.read()
+####Description
+read content of file which is opened before.
+
+####Syntax
+file.read()
+
+####Parameters
+if nothing passed in, read all byte in file.
+if pass a number n, then read n byte from file, or EOF is reached.
+if pass a string "q", then read until 'q' or EOF is reached. 
+
+####Returns
+file content in string<br />
+return nil when EOF.
+
+####Example
+
+```lua
+    -- print the first line of 'init.lua'
+    file.open("init.lua", "r")
+    print(file.read('\r'))
+    file.close()
+
+    -- print the first 5 byte of 'init.lua'
+    file.open("init.lua", "r")
+    print(file.read(5))
+    file.close()
+```
+
+####See also
+**-**   [file.open()](#fl_open)<br />
+**-**   [file.close()](#fl_close)
+
+**-** [Back to Index](#index)
 
 <a id="fl_write"></a>
 ## file.write()
@@ -1005,6 +1120,32 @@ nil
 
 **-** [Back to Index](#index)
 
+<a id="wf_sleeptype"></a>
+## wifi.sleeptype()
+####Description
+config the sleep type for wifi modem.
+
+####Syntax
+type_actual = wifi.sleeptype(type_need)
+
+####Parameters
+type_need:<br />
+wifi.NONE_SLEEP, wifi.LIGHT_SLEEP, wifi.MODEM_SLEEP
+
+####Returns
+type_actual:<br />
+wifi.NONE_SLEEP, wifi.LIGHT_SLEEP, wifi.MODEM_SLEEP
+
+####Example
+
+```lua
+    realtype = wifi.sleeptype(wifi.MODEM_SLEEP)
+```
+
+####See also
+**-**   [node.dsleep()](#nm_dsleep)
+
+**-** [Back to Index](#index)
 
 #wifi.sta module
 <a id="ws_config"></a>
@@ -1128,7 +1269,7 @@ nil
 <a id="ws_getip"></a>
 ## wifi.sta.getip()
 ####Description
-get ip address in station mode.
+get ip, netmask, gateway address in station mode.
 
 ####Syntax
 wifi.sta.getip()
@@ -1138,14 +1279,22 @@ nil
 
 
 ####Returns
-ip address in string, for example:"192.168.0.111"<br />
+ip, netmask, gateway address in string, for example:"192.168.0.111"<br />
 return nil if ip = "0.0.0.0".
 
 ####Example
 
 ```lua
-    -- print current ip
+    -- print current ip, netmask, gateway
     print(wifi.sta.getip())
+    -- 192.168.0.111  255.255.255.0  192.168.0.1
+    ip = wifi.sta.getip()
+    print(ip)
+    -- 192.168.0.111
+    ip, nm = wifi.sta.getip()
+    print(nm)
+    -- 255.255.255.0
+
 ```
 
 ####See also
@@ -1154,6 +1303,44 @@ return nil if ip = "0.0.0.0".
 
 **-** [Back to Index](#index)
 
+<a id="ws_setip"></a>
+## wifi.sta.setip()
+####Description
+set ip, netmask, gateway address in station mode.
+
+####Syntax
+wifi.sta.setip(cfg)
+
+####Parameters
+cfg: table contain ip, netmask, and gateway<br />
+```lua
+{
+  "ip":"192.168.0.111",
+  "netmask":"255.255.255.0",
+  "gateway":"192.168.0.1"
+}
+```
+
+####Returns
+true if success, false if fail.
+
+####Example
+
+```lua
+  cfg =
+  {
+    "ip":"192.168.0.111",
+    "netmask":"255.255.255.0",
+    "gateway":"192.168.0.1"
+  }
+  wifi.sta.setip(cfg)
+
+```
+
+####See also
+**-**   [wifi.sta.setmac()](#ws_setmac)
+
+**-** [Back to Index](#index)
 
 <a id="ws_getmac"></a>
 ## wifi.sta.getmac()
@@ -1182,6 +1369,29 @@ mac address in string, for example:"18-33-44-FE-55-BB"
 
 **-** [Back to Index](#index)
 
+<a id="ws_setmac"></a>
+## wifi.sta.setmac()
+####Description
+set mac address in station mode.
+
+####Syntax
+wifi.sta.setmac(mac)
+
+####Parameters
+mac address in byte string, for example:"\024\024\024\024\024\024"
+
+####Returns
+true if success, false if fail.
+
+####Example
+```lua
+    print(wifi.sta.setmac("\024\024\024\024\024\024"))
+```
+
+####See also
+**-**   [wifi.sta.setip()](#ws_setip)
+
+**-** [Back to Index](#index)
 
 <a id="ws_getap"></a>
 ## wifi.sta.getap()
@@ -1242,6 +1452,37 @@ number： 0~5
 
 **-** [Back to Index](#index)
 
+<a id="ws_getbroadcast"></a>
+## wifi.sta.getbroadcast()
+####Description
+get getbroadcast address in station mode.
+
+####Syntax
+wifi.sta.getbroadcast()
+
+####Parameters
+nil
+
+
+####Returns
+getbroadcast address in string, for example:"192.168.0.255"<br />
+return nil if ip = "0.0.0.0".
+
+####Example
+
+```lua
+    bc = wifi.sta.getbroadcast()
+    print(bc)
+    -- 192.168.0.255
+
+```
+
+####See also
+**-**   [wifi.sta.getip()](#ws_getip)
+
+
+**-** [Back to Index](#index)
+
 
 #wifi.ap module
 <a id="wa_config"></a>
@@ -1276,7 +1517,7 @@ nil
 <a id="wa_getip"></a>
 ## wifi.ap.getip()
 ####Description
-get ip in ap mode.
+get ip, netmask, gateway in ap mode.
 
 ####Syntax
 wifi.ap.getip()
@@ -1285,13 +1526,21 @@ wifi.ap.getip()
 nil
 
 ####Returns
-ip address in string, for example:"192.168.0.111"<br />
+ip, netmask, gateway address in string, for example:"192.168.0.111"<br />
 return nil if ip = "0.0.0.0".
 
 ####Example
 
 ```lua
-    wifi.ap.getip()
+    -- print current ip, netmask, gateway
+    print(wifi.ap.getip())
+    -- 192.168.4.1  255.255.255.0  192.168.4.1
+    ip = wifi.ap.getip()
+    print(ip)
+    -- 192.168.4.1
+    ip, nm = wifi.ap.getip()
+    print(nm)
+    -- 255.255.255.0
 ```
 
 ####See also
@@ -1300,6 +1549,44 @@ return nil if ip = "0.0.0.0".
 
 **-** [Back to Index](#index)
 
+<a id="wa_setip"></a>
+## wifi.ap.setip()
+####Description
+set ip, netmask, gateway address in ap mode.
+
+####Syntax
+wifi.ap.setip(cfg)
+
+####Parameters
+cfg: table contain ip, netmask, and gateway<br />
+```lua
+{
+  "ip":"192.168.1.1",
+  "netmask":"255.255.255.0",
+  "gateway":"192.168.1.1"
+}
+```
+
+####Returns
+true if success, false if fail.
+
+####Example
+
+```lua
+  cfg =
+  {
+    "ip":"192.168.1.1",
+    "netmask":"255.255.255.0",
+    "gateway":"192.168.1.1"
+  }
+  wifi.ap.setip(cfg)
+
+```
+
+####See also
+**-**   [wifi.ap.setmac()](#wa_setmac)
+
+**-** [Back to Index](#index)
 
 <a id="wa_getmac"></a>
 ## wifi.ap.getmac()
@@ -1326,6 +1613,60 @@ mac address in string, for example:"1A-33-44-FE-55-BB"
 
 **-** [Back to Index](#index)
 
+<a id="wa_setmac"></a>
+## wifi.ap.setmac()
+####Description
+set mac address in ap mode.
+
+####Syntax
+wifi.ap.setmac(mac)
+
+####Parameters
+mac address in byte string, for example:"\024\024\024\024\024\024"
+
+####Returns
+true if success, false if fail.
+
+####Example
+```lua
+    print(wifi.ap.setmac("\024\024\024\024\024\024"))
+```
+
+####See also
+**-**   [wifi.ap.setip()](#wa_setip)
+
+**-** [Back to Index](#index)
+
+<a id="wa_getbroadcast"></a>
+## wifi.ap.getbroadcast()
+####Description
+get getbroadcast address in ap mode.
+
+####Syntax
+wifi.ap.getbroadcast()
+
+####Parameters
+nil
+
+
+####Returns
+getbroadcast address in string, for example:"192.168.0.255"<br />
+return nil if ip = "0.0.0.0".
+
+####Example
+
+```lua
+    bc = wifi.ap.getbroadcast()
+    print(bc)
+    -- 192.168.0.255
+
+```
+
+####See also
+**-**   [wifi.ap.getip()](#wa_getip)
+
+
+**-** [Back to Index](#index)
 
 #timer module
 <a id="tm_delay"></a>
@@ -1474,6 +1815,27 @@ nil
 
 ####See also
 **-**   [tmr.delay()](#tm_delay)
+
+**-** [Back to Index](#index)
+
+<a id="tm_time"></a>
+## tmr.time()
+####Description
+return rtc time since start up in second, uint31 form.<br />
+
+####Syntax
+tmr.time()
+
+####Parameters
+nil.
+
+####Returns
+number
+
+####Example
+
+####See also
+**-**   [tmr.now()](#tm_now)
 
 **-** [Back to Index](#index)
 
@@ -3051,7 +3413,75 @@ boolean: true if the bit at the given position is 0, false othewise.
 ####See also
 **-**   []()
 
+**-** [Back to Index](#index)
 
+#spi module
+##CONSTANT
+MASTER, SLAVE, CPHA_LOW, CPHA_HIGH, CPOL_LOW, CPOL_HIGH, DATABITS_8, DATABITS_16
+
+<a id="spi_setup"></a>
+## spi.setup()
+####Description
+setup spi configuration.<br />
+
+####Syntax
+spi.setup( id, mode, cpol, cpha, databits, clock )
+
+####Parameters
+id: spi id number.<br />
+mode: MASTER or SLAVE(not supported yet).<br />
+cpol: CPOL_LOW or CPOL_HIGH, clock polarity.<br />
+cpha: CPHA_HIGH or CPHA_LOW, clock phase.<br />
+databits: DATABITS_8 or DATABITS_16.<br />
+clock: spi clock (not supported yet).
+
+####Returns
+number: 1.
+
+####See also
+**-**   []()
+
+**-** [Back to Index](#index)
+
+<a id="spi_send"></a>
+## spi.send()
+####Description
+send data to spi.<br />
+
+####Syntax
+wrote = spi.send( id, data1, [data2], ..., [datan] )
+
+####Parameters
+id: spi id number.<br />
+data: data can be either a string, a table or an 8-bit number
+
+####Returns
+number: bytes writen count.
+
+####See also
+**-**   []()
+
+**-** [Back to Index](#index)
+
+<a id="spi_recv"></a>
+## spi.recv()
+####Description
+recv data from spi.<br />
+
+####Syntax
+read = spi.recv( id, size )
+
+####Parameters
+id: spi id number.<br />
+size: data size want to read.
+
+####Returns
+data: string bytes read from spi.
+
+####See also
+**-**   []()
+
+**-** [Back to Index](#index)
 
 </xmp>
 
