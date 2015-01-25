@@ -140,7 +140,15 @@
 [spi.setup()](#spi_setup)<br />
 [spi.send()](#spi_send)<br />
 [spi.recv()](#spi_recv)<br />
-
+###mqtt module
+[mqtt.Client()](#mqtt_client)<br />
+###mqtt client sub-module
+[mqtt:lwt()](#mqtt_lwt)<br />
+[mqtt:connect()](#mqtt_connect)<br />
+[mqtt:close()](#mqtt_close)<br />
+[mqtt:publish()](#mqtt_publish)<br />
+[mqtt:subscribe()](#mqtt_subscribe)<br />
+[mqtt:on()](#mqtt_on)<br />
 
 **-**[Back to Index](#index)
 
@@ -2935,6 +2943,8 @@ power:  1 for wire being held high for parasitically powered devices.
 ####Returns
 nil
 
+####Example
+
 ####See also
 **-**   []()
 
@@ -2958,6 +2968,8 @@ power:  1 for wire being held high for parasitically powered devices.
 ####Returns
 nil
 
+####Example
+
 ####See also
 **-**   []()
 
@@ -2978,6 +2990,8 @@ pin:  1~12, IO index <br />
 
 ####Returns
 byte read from slave device.
+
+####Example
 
 ####See also
 **-**   []()
@@ -3002,6 +3016,8 @@ size:  number of bytes to be read from slave device.<br />
 ####Returns
 string: bytes read from slave device.
 
+####Example
+
 ####See also
 **-**   []()
 
@@ -3019,6 +3035,8 @@ ow.depower(pin)
 
 ####Parameters
 pin:  1~12, IO index <br />
+
+####Example
 
 ####Returns
 nil
@@ -3044,6 +3062,8 @@ pin:  1~12, IO index <br />
 ####Returns
 nil
 
+####Example
+
 ####See also
 **-**   []()
 
@@ -3065,6 +3085,8 @@ family_code:  byte for family code.
 
 ####Returns
 nil
+
+####Example
 
 ####See also
 **-**   []()
@@ -3088,6 +3110,8 @@ pin:  1~12, IO index <br />
 if succeed return a string length of 8, which contain the rom code of slave device. <br />
 if failed in searching next device return nil.
 
+####Example
+
 ####See also
 **-**   []()
 
@@ -3108,6 +3132,8 @@ buf: string value, data to be calculated check sum in string. <br />
 
 ####Returns
 crc result in byte.
+
+####Example
 
 ####See also
 **-**   []()
@@ -3133,6 +3159,8 @@ crc:  crc starting value (optional)
 ####Returns
 bool: true, if the CRC matches; false for dismatches.
 
+####Example
+
 ####See also
 **-**   []()
 
@@ -3156,6 +3184,8 @@ crc:  crc starting value (optional)
 
 ####Returns
 return The CRC16, as defined by Dallas Semiconductor.
+
+####Example
 
 ####See also
 **-**   []()
@@ -3181,6 +3211,8 @@ value: the number to negate.
 ####Returns
 number: the bitwise negated value of the number.
 
+####Example
+
 ####See also
 **-**   []()
 
@@ -3202,6 +3234,8 @@ valn: nth AND argument.
 
 ####Returns
 number: the bitwise AND of all the arguments.
+
+####Example
 
 ####See also
 **-**   []()
@@ -3226,6 +3260,8 @@ valn: nth OR argument.
 ####Returns
 number: the bitwise OR of all the arguments.
 
+####Example
+
 ####See also
 **-**   []()
 
@@ -3249,6 +3285,8 @@ valn: nth XOR argument.
 ####Returns
 number: the bitwise XOR of all the arguments.
 
+####Example
+
 ####See also
 **-**   []()
 
@@ -3271,6 +3309,8 @@ shift: positions to shift.
 ####Returns
 number: the number shifted left
 
+####Example
+
 ####See also
 **-**   []()
 
@@ -3291,6 +3331,8 @@ shift: positions to shift.
 
 ####Returns
 number: the number shifted right (logically).
+
+####Example
 
 ####See also
 **-**   []()
@@ -3314,6 +3356,8 @@ shift: positions to shift.
 ####Returns
 number: the number shifted right (arithmetically).
 
+####Example
+
 ####See also
 **-**   []()
 
@@ -3334,6 +3378,8 @@ position: position of the bit that will be set to 1.
 
 ####Returns
 number: a number with only one 1 bit at position (the rest are set to 0).
+
+####Example
 
 ####See also
 **-**   []()
@@ -3359,6 +3405,8 @@ posn: position of the nth bit to set.
 ####Returns
 number: the number with the bit(s) set in the given position(s).
 
+####Example
+
 ####See also
 **-**   []()
 
@@ -3383,6 +3431,8 @@ posn: position of thet nth bit to clear.
 ####Returns
 number: the number with the bit(s) cleared in the given position(s).
 
+####Example
+
 ####See also
 **-**   []()
 
@@ -3405,6 +3455,8 @@ position: bit position to test.
 ####Returns
 boolean: true if the bit at the given position is 1, false otherwise.
 
+####Example
+
 ####See also
 **-**   []()
 
@@ -3426,6 +3478,8 @@ position: bit position to test.
 
 ####Returns
 boolean: true if the bit at the given position is 0, false othewise.
+
+####Example
 
 ####See also
 **-**   []()
@@ -3455,6 +3509,8 @@ clock: spi clock (not supported yet).
 ####Returns
 number: 1.
 
+####Example
+
 ####See also
 **-**   []()
 
@@ -3475,6 +3531,8 @@ data: data can be either a string, a table or an 8-bit number
 ####Returns
 number: bytes writen count.
 
+####Example
+
 ####See also
 **-**   []()
 
@@ -3494,6 +3552,210 @@ size: data size want to read.
 
 ####Returns
 data: string bytes read from spi.
+
+####Example
+
+####See also
+**-**   []()
+
+**-** [Back to Index](#index)
+
+#mqtt module
+##CONSTANT
+
+<a id="mqtt_client"></a>
+## mqtt.Client()
+####Description
+create a mqtt client.<br />
+
+####Syntax
+mqtt.Client(clientid, keepalive, user, pass)
+
+####Parameters
+clientid: the client id.<br />
+keepalive: keepalive second, a number.<br />
+user: user name, a string.<br />
+pass: user password, a string.
+
+####Returns
+mqtt client.
+
+####Example
+```lua
+-- init mqtt client with keepalive timer 120sec
+m = mqtt.Client("clientid", 120, "user", "password")
+
+-- setup Last Will and Testament (optional)
+-- Broker will publish a message with qos = 0, retain = 0, data = "offline" 
+-- to topic "/lwt" if client don't send keepalive packet
+m:lwt("/lwt", "offline", 0, 0)
+
+m:on("connect", function(con) print ("connected") end)
+m:on("offline", function(con) print ("offline") end)
+
+-- on publish message receive event
+m:on("message", function(conn, topic, data) 
+  print(topic .. ":" ) 
+  if data ~= nil then
+    print(data)
+  end
+end)
+
+-- for secure: m:connect("192.168.11.118", 1880, 1)
+m:connect("192.168.11.118", 1880, 0, function(conn) print("connected") end)
+
+-- subscribe topic with qos = 0
+m:subscribe("/topic",0, function(conn) print("subscribe success") end)
+
+-- publish a message with data = hello, QoS = 0, retain = 0
+m:publish("/topic","hello",0,0, function(conn) print("sent") end)
+
+m:close();
+-- you can call m:connect again
+```
+####See also
+**-**   []()
+
+**-** [Back to Index](#index)
+
+#mqtt client module
+
+<a id="mqtt_lwt"></a>
+## mqtt:lwt()
+####Description
+setup Last Will and Testament (optional)<br />
+Broker will publish a message with qos = 0, retain = 0, data = "offline" <br />
+to topic "/lwt" if client don't send keepalive packet.
+
+####Syntax
+mqtt:lwt(topic, message, qos, retain)
+
+####Parameters
+topic: the topic to publish to, String.<br />
+message: the message to publish, Buffer or String.<br />
+qos: qos level, default 0.<br />
+retain: retain flag, default 0.
+
+####Returns
+nil.
+
+####Example
+
+####See also
+**-**   []()
+
+**-** [Back to Index](#index)
+
+<a id="mqtt_connect"></a>
+## mqtt:connect()
+####Description
+Connects to the broker specified by the given host, port, and secure options
+
+####Syntax
+mqtt:connect( host, port, secure, function(client) )
+
+####Parameters
+host: host domain or ip, string.<br />
+port: number, broker port.<br />
+secure: 0 or 1, default 0.<br />
+function(client): when connected, call this function.
+
+####Returns
+nil.
+
+####Example
+
+####See also
+**-**   []()
+
+**-** [Back to Index](#index)
+
+<a id="mqtt_close"></a>
+## mqtt:close()
+####Description
+Connects to the broker specified by the given host, port, and secure options
+
+####Syntax
+mqtt:close()
+
+####Parameters
+nil
+
+####Returns
+nil.
+
+####Example
+
+####See also
+**-**   []()
+
+**-** [Back to Index](#index)
+
+<a id="mqtt_publish"></a>
+## mqtt:publish()
+####Description
+Publish a message
+
+####Syntax
+mqtt:publish( topic, payload, qos, retain, function(client) )
+
+####Parameters
+topic: the topic to publish to, string<br />
+message: the message to publish, string<br />
+qos: qos level, default 0<br />
+retain: retain flag, default 0<br />
+function(client): callback fired when PUBACK received.<br />
+
+####Returns
+nil.
+
+####Example
+
+####See also
+**-**   []()
+
+**-** [Back to Index](#index)
+
+<a id="mqtt_subscribe"></a>
+## mqtt:subscribe()
+####Description
+Subscribe to a topic or topics
+
+####Syntax
+mqtt:subscribe(topic, qos, function(client, topic, message))
+
+####Parameters
+topic: a string topic to subscribe to
+qos: qos subscription level, default 0
+function(client, topic, message): callback fired when message received.<br />
+
+####Returns
+nil.
+
+####Example
+
+####See also
+**-**   []()
+
+**-** [Back to Index](#index)
+
+<a id="mqtt_on"></a>
+## mqtt:on()
+####Description
+register callback function to event.
+
+####Syntax
+mqtt:on(event, function(client, [topic], [message]))
+
+####Parameters
+event: string, which can be: "connect", "message", "offline"<br />
+function cb(client, [topic], [message]): callback function. The first param is the client.<br />
+If event is "message",  the 2nd and 3rd param are received topic and message in string.
+
+####Returns
+nil.
+
+####Example
 
 ####See also
 **-**   []()
