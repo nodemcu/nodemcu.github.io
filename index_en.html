@@ -1,0 +1,615 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+  <!--[if lt IE 9]>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+                    <script type="text/javascript" src="vendor/bower/html5shiv/dist/html5shiv.js"></script>
+            <![endif]-->
+  <link rel="icon" type="image/png" href="favicon.png" />
+
+  <link rel="stylesheet" href="css/base.css">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/ribbon.css">
+  <link rel="stylesheet" href="resource/mystyle.css" />
+  <script type="text/javascript" src="resource/prettify.js"></script>
+  <script type="text/javascript" src="resource/lang-lua.js"></script>
+  <title>NodeMcu -- An open-source firmware based on ESP8266 wifi-soc.</title>
+  <script type="text/javascript" src="vendor/bower/jquery/jquery.js"></script>
+  <script type="text/javascript" src="js/backend/jquery-extends/live-patch.js"></script>
+
+  <script type="text/javascript">
+    var fonts = {
+      "Open Sans": {
+        "family": "Open Sans",
+        "source": "google",
+        "subsets": [
+          "cyrillic",
+          "cyrillic-ext",
+          "greek",
+          "greek-ext",
+          "latin",
+          "latin-ext",
+          "vietnamese"
+        ],
+        "variants": [
+          "300",
+          "300italic",
+          "600",
+          "600italic",
+          "700",
+          "700italic",
+          "800",
+          "800italic",
+          "italic",
+          "regular"
+        ]
+      },
+      "Oxygen": {
+        "family": "Oxygen",
+        "source": "google",
+        "subsets": [
+          "latin",
+          "latin-ext"
+        ],
+        "variants": [
+          "300",
+          "700",
+          "regular"
+        ]
+      }
+    };
+  </script>
+
+  <script type="text/javascript" src="vendor/js/webfont.js"></script>
+  <script type="text/javascript" src="js/fontloader.js"></script>
+
+
+
+  <meta http-equiv="content-language" content="en">
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8">
+  <meta name="keywords" content="nodemcu,wifi-soc,esp8266" />
+  <meta name="description" content="NodeMcu -- a firmware based on ESP8266 wifi-soc." />
+</head>
+
+<body onload="prettyPrint()">
+  <div class="b-content">
+    <div id="fr_54747f3dd775ef1a360001a2" class="fr-widget fr-container fr_murose ">
+      <div id="fr_54747f65d775ef1a360001a6" class="fr-widget fr-grid fr_jagefe ">
+        <a id="fr_547774ea7976d87281000029" class="fr-widget fr-text fr-wf fr_hometopbutton  fr-link fr-widget-hover-opacity-60" href="#fr_54745c8bd775ef4b99000011">
+          <div class="fr-text">Home</div>
+
+        </a><!--
+
+     --><a id="fr_547774e07976d87281000024" class="fr-widget fr-text fr-wf fr_featurestopbutton  fr-link fr-widget-hover-opacity-60" href="#fr_54747361d775ef1a3600000f">
+          <div class="fr-text">Features</div>
+
+        </a><!--
+
+     --><a id="fr_547774d67976d8728100001f" class="fr-widget fr-text fr-wf fr_examplestopbutton  fr-link fr-widget-hover-opacity-60" href="#fr_5475f7667976d8501100000f">
+          <div class="fr-text">Examples</div>
+
+        </a><!--
+
+     --><a id="fr_54775ef27976d8728100000f" class="fr-widget fr-text fr-wf fr_devkittopbutton  fr-link fr-widget-hover-opacity-60" href="#fr_54747661d775ef1a3600009e">
+          <div class="fr-text">DevKit</div>
+
+        </a><!--
+
+     --><a id="fr_549033f3f6fa847bcb00010a" class="fr-widget fr-text fr-wf fr_langtopbutton  fr-link fr-widget-hover-opacity-60" href="index_cn.html">
+          <div class="fr-text">中 文</div>
+
+        </a>
+
+
+      </div>
+
+      <div class="ribbon">
+        <a href="https://github.com/nodemcu/nodemcu-firmware">Fork me on GitHub</a>
+      </div>
+
+    </div><!--
+
+ --><div id="fr_54745c8bd775ef4b99000011" class="fr-widget fr-container fr_fixed_header ">
+      <div id="fr_54747d26d775ef1a3600019d" class="fr-widget fr-img fr_duhofu ">
+        <img src="images/thumbnail/nodemcu-style5-150px.png_150x150.png" />
+
+      </div><!--
+
+   --><div id="fr_54745c8bd775ef4b99000014" class="fr-widget fr-container fr_container_5 ">
+        <div id="fr_54745c8bd775ef4b9900001b" class="fr-widget fr-container fr_text_block_center_2 ">
+          <div id="fr_54745c8bd775ef4b99000055" class="fr-widget fr-text fr-wf fr_header_center_3 fr_h1 ">
+            <div class="fr-text">
+              <div>NodeMcu</div>Connect Things EASY</div>
+
+          </div><!--
+
+       --><div id="fr_54745c8bd775ef4b99000053" class="fr-widget fr-text fr-wf fr_paragraph_center_2 ">
+            <div class="fr-text">
+              An open-source firmware and development kit that helps you to prototype your IOT product within a few Lua script lines
+            </div>
+
+          </div>
+
+
+        </div>
+
+
+      </div>
+
+      <script>
+        (function() {
+          'use strict';
+          var $that = $(this);
+
+          $(window).on(
+            'scroll',
+            function() {
+              $that.css('top', -window.scrollY * 0.2 + 'px');
+            }
+          );
+        }).call(document.getElementsByClassName('fr_fixed_header')[0]);
+      </script>
+
+    </div><!--
+
+ --><div id="fr_54747361d775ef1a3600000f" class="fr-widget fr-container fr_features ">
+      <div id="fr_54747361d775ef1a3600001e" class="fr-widget fr-text fr-wf fr_featurestitle ">
+        <div class="fr-text">Features</div>
+
+      </div><!--
+
+   --><div id="fr_54747361d775ef1a3600001a" class="fr-widget fr-text fr-wf fr_featuresslogan ">
+        <div class="fr-text">Open-source, Interactive, Programmable, Low cost, Simple, Smart, WI-FI enabled</div>
+
+      </div><!--
+
+   --><div id="fr_54747361d775ef1a36000013" class="fr-widget fr-grid fr_featuresgrid ">
+        <div id="fr_54747361d775ef1a3600002a" class="fr-widget fr-container fr_chip ">
+          <div id="fr_54747362d775ef1a36000084" class="fr-widget fr-img fr_chipimage ">
+            <img src="images/thumbnail/chips.png_200x200.png" />
+
+          </div><!--
+
+       --><div id="fr_54923c897af6d40d56000010" class="fr-widget fr-text fr-wf fr_textchipslogan ">
+            <div class="fr-text">Arduino-like hardware IO</div>
+
+          </div><!--
+
+       --><div id="fr_54747362d775ef1a3600007c" class="fr-widget fr-text fr-wf fr_textchip ">
+            <div class="fr-text">Advanced API for hardware IO, which can dramatically reduce the redundant work for configuring and manipulating hardware. Code like arduino, but interactively in Lua script.</div>
+
+          </div>
+
+
+        </div><!--
+
+     --><div id="fr_54747361d775ef1a36000026" class="fr-widget fr-container fr_node ">
+          <div id="fr_54747362d775ef1a36000060" class="fr-widget fr-img fr_nodeimage ">
+            <img src="images/thumbnail/node1s_1.png_200x200.png" />
+
+          </div><!--
+
+       --><div id="fr_54923cd67af6d40d56000014" class="fr-widget fr-text fr-wf fr_textnodeslogan ">
+            <div class="fr-text">Nodejs style network API</div>
+
+          </div><!--
+
+       --><div id="fr_54747362d775ef1a36000058" class="fr-widget fr-text fr-wf fr_textnode ">
+            <div class="fr-text">Event-driven API for network applicaitons, which faciliates developers writing code running on a 5mm*5mm sized MCU in Nodejs style. Greatly speed up your IOT application developing process.</div>
+
+          </div>
+
+
+        </div><!--
+
+     --><div id="fr_54747361d775ef1a36000022" class="fr-widget fr-container fr_cloud ">
+          <div id="fr_54747361d775ef1a3600003c" class="fr-widget fr-img fr_cloudimage ">
+            <img src="images/thumbnail/clouds.png_200x200.png" />
+
+          </div><!--
+
+       --><div id="fr_54923ce97af6d40d56000018" class="fr-widget fr-text fr-wf fr_textcloudslogan ">
+            <div class="fr-text">Lowest cost WI-FI</div>
+
+          </div><!--
+
+       --><div id="fr_54747361d775ef1a36000034" class="fr-widget fr-text fr-wf fr_textcloud ">
+            <div class="fr-text">Less than $2 WI-FI MCU ESP8266 integrated and esay to prototyping development kit. We provide the best platform for IOT application development at the lowest cost.</div>
+
+          </div>
+
+
+        </div>
+
+
+      </div>
+
+
+    </div><!--
+
+ --><div id="fr_54760baa7976d83acd000013" class="fr-widget fr-container fr_pudale ">
+
+    </div><!--
+
+ --><div id="fr_54747661d775ef1a3600009e" class="fr-widget fr-container fr_dev_kit ">
+      <div id="fr_54747661d775ef1a360000a8" class="fr-widget fr-text fr-wf fr_devkittitle ">
+        <div class="fr-text">Development Kit</div>
+
+      </div><!--
+
+   --><div id="fr_547629d27976d849b9000011" class="fr-widget fr-text fr-wf fr_devkitslogan ">
+        <div class="fr-text">The Development Kit based on ESP8266, integates GPIO, PWM, IIC, 1-Wire and ADC all in one board. Power your developement in the fastest way combinating with NodeMcu Firmware!</div>
+
+      </div><!--
+
+   --><div id="fr_5476109a7976d83acd000017" class="fr-widget fr-img fr_devkitimage ">
+        <img src="images/thumbnail/zms.jpg_1200x1200.jpg" />
+
+      </div><!--
+
+   --><div id="fr_54747661d775ef1a360000a2" class="fr-widget fr-grid fr_devkit3columngrid ">
+        <div id="fr_54747661d775ef1a360000b4" class="fr-widget fr-container fr_pic1 ">
+          <div id="fr_54747662d775ef1a360000e4" class="fr-widget fr-img fr_devkitpic ">
+            <img src="images/thumbnail/z1s_1.jpg_450x300.jpg" />
+
+          </div><!--
+
+       --><div id="fr_54747662d775ef1a360000d8" class="fr-widget fr-text fr-wf fr_pic1dis ">
+            <div class="fr-text">USB-TTL included, plug&amp;play</div>
+
+          </div>
+
+
+        </div><!--
+
+     --><div id="fr_54747661d775ef1a360000b0" class="fr-widget fr-container fr_pic2 ">
+          <div id="fr_54747661d775ef1a360000d4" class="fr-widget fr-img fr_devkitpic_2 ">
+            <img src="images/thumbnail/b1s.jpg_450x300.jpg" />
+
+          </div><!--
+
+       --><div id="fr_54747661d775ef1a360000c8" class="fr-widget fr-text fr-wf fr_pic2dis ">
+            <div class="fr-text">10 GPIO, every GPIO can be PWM, I2C, 1-wire</div>
+
+          </div>
+
+
+        </div><!--
+
+     --><div id="fr_54747661d775ef1a360000ac" class="fr-widget fr-container fr_pic3 ">
+          <div id="fr_54747661d775ef1a360000c4" class="fr-widget fr-img fr_devkitpic_3 ">
+            <img src="images/thumbnail/c1s.jpg_450x300.jpg" />
+
+          </div><!--
+
+       --><div id="fr_54747661d775ef1a360000b8" class="fr-widget fr-text fr-wf fr_pic3dis ">
+            <div class="fr-text">FCC CERTIFIED WI-FI module, PCB antenna</div>
+
+          </div>
+
+
+        </div>
+
+
+      </div>
+
+
+    </div><!--
+
+ --><div id="fr_547479c8d775ef1a36000108" class="fr-widget fr-container fr_pukolo ">
+
+    </div><!--
+
+ --><div id="fr_5475f7667976d8501100000f" class="fr-widget fr-container fr_examples ">
+      <div id="fr_5475f7667976d8501100001e" class="fr-widget fr-text fr-wf fr_examplestitle ">
+        <div class="fr-text">Examples</div>
+
+      </div><!--
+
+   --><div id="fr_5475f7667976d8501100001a" class="fr-widget fr-text fr-wf fr_examplesslogan ">
+        <div class="fr-text">A few examples to play with</div>
+
+      </div><!--
+
+   --><div id="fr_548f020bf6fa84489e000055" class="fr-widget fr-grid fr_examplesgrid ">
+        <div id="fr_548f0368f6fa84489e00006b" class="fr-widget fr-text fr-wf fr_paragraph_center_3 ">
+          <div class="fr-text">
+            <p>Connect to the wireless network</p>
+            <pre class="prettyprint">
+              <code class="language-lua">
+print(wifi.sta.getip())
+--nil
+wifi.setmode(wifi.STATION)
+wifi.sta.config("SSID","password")
+print(wifi.sta.getip())
+--192.168.18.110
+              </code>
+            </pre>
+          </div>
+
+        </div><!--
+
+     --><div id="fr_548f038ff6fa84489e000070" class="fr-widget fr-text fr-wf fr_paragraph_center_4 ">
+          <div class="fr-text">
+            <p>Arduino like IO access</p>
+            <pre class="prettyprint">
+              <code class="language-lua">
+pin = 1
+gpio.mode(pin,gpio.OUTPUT)
+gpio.write(pin,gpio.HIGH)
+gpio.mode(pin,gpio.INPUT)
+print(gpio.read(pin))
+
+              </code>
+            </pre>
+          </div>
+
+        </div><!--
+
+     --><div id="fr_548f039bf6fa84489e000075" class="fr-widget fr-text fr-wf fr_paragraph_center_5 ">
+          <div class="fr-text">
+            <p>HTTP Client</p>
+            <pre class="prettyprint">
+              <code class="language-lua">
+-- A simple http client
+conn=net.createConnection(net.TCP, false) 
+conn:on("receive", function(conn, pl) print(pl) end)
+conn:connect(80,"121.41.33.127")
+conn:send("GET / HTTP/1.1\r\nHost: www.nodemcu.com\r\n"
+    .."Connection: keep-alive\r\nAccept: */*\r\n\r\n")
+
+              </code>
+            </pre>
+          </div>
+
+        </div><!--
+
+     --><div id="fr_548f03a6f6fa84489e00007a" class="fr-widget fr-text fr-wf fr_paragraph_center_6 ">
+          <div class="fr-text">
+            <p>HTTP Server</p>
+            <pre class="prettyprint">
+              <code class="language-lua">
+-- a simple http server
+srv=net.createServer(net.TCP) 
+srv:listen(80,function(conn) 
+    conn:on("receive",function(conn,payload) 
+    print(payload) 
+    conn:send("&lth1&gt Hello, NodeMcu.&lt/h1&gt")
+    end) 
+end)
+              </code>
+            </pre>
+          </div>
+
+        </div><!--
+
+     --><div id="fr_54900805f6fa847bcb00002b" class="fr-widget fr-text fr-wf fr_paragraph_center_7 ">
+          <div class="fr-text">
+            <p>PWM</p>
+            <pre class="prettyprint">
+              <code class="language-lua">
+function led(r,g,b) 
+    pwm.setduty(1,r) 
+    pwm.setduty(2,g) 
+    pwm.setduty(3,b) 
+end
+pwm.setup(1,500,512) 
+pwm.setup(2,500,512) 
+pwm.setup(3,500,512)
+pwm.start(1) 
+pwm.start(2) 
+pwm.start(3)
+led(512,0,0) -- red
+led(0,0,512) -- blue
+              </code>
+            </pre>
+          </div>
+
+        </div><!--
+
+     --><div id="fr_5490082df6fa847bcb00003d" class="fr-widget fr-text fr-wf fr_paragraph_center_8 ">
+          <div class="fr-text">
+            <p>Blinking Led</p>
+            <pre class="prettyprint">
+              <code class="language-lua">
+
+lighton=0
+tmr.alarm(0,1000,1,function()
+if lighton==0 then 
+    lighton=1 
+    led(512,512,512) 
+    -- 512/1024, 50% duty cycle
+else 
+    lighton=0 
+    led(0,0,0) 
+end 
+end)
+
+              </code>
+            </pre>
+
+          </div>
+
+        </div><!--
+
+     --><div id="fr_54900834f6fa847bcb000042" class="fr-widget fr-text fr-wf fr_paragraph_center_9 ">
+          <div class="fr-text">
+            <p>Bootstrap</p>
+            <pre class="prettyprint">
+              <code class="language-lua">
+--init.lua will be excuted
+file.open("init.lua","w")
+file.writeline([[print("Hello World!")]])
+file.close()
+node.restart()  -- this will restart the module.
+              </code>
+            </pre>
+          </div>
+
+        </div><!--
+
+     --><div id="fr_54900837f6fa847bcb000047" class="fr-widget fr-text fr-wf fr_paragraph_center_10 ">
+          <div class="fr-text">
+            <p>Use timer to repeat</p>
+            <pre class="prettyprint">
+              <code class="language-lua">
+tmr.alarm(1,5000,1,function() print("alarm 1") end)
+tmr.alarm(0,1000,1,function() print("alarm 0") end)
+tmr.alarm(2,2000,1,function() print("alarm 2") end)
+-- after sometime
+tmr.stop(0)
+              </code>
+            </pre>
+          </div>
+
+        </div><!--
+
+     --><div id="fr_54900e2bf6fa847bcb00004c" class="fr-widget fr-text fr-wf fr_paragraph_center_11 ">
+          <div class="fr-text">
+            <p>A pure lua telnet server</p>
+            <pre class="prettyprint">
+              <code class="language-lua">
+-- a simple telnet server
+s=net.createServer(net.TCP,180) 
+s:listen(2323,function(c) 
+    function s_output(str) 
+      if(c~=nil) 
+        then c:send(str) 
+      end 
+    end 
+    node.output(s_output, 0)   
+    -- re-direct output to function s_ouput.
+    c:on("receive",function(c,l) 
+      node.input(l)           
+      --like pcall(loadstring(l)), support multiple separate lines
+    end) 
+    c:on("disconnection",function(c) 
+      node.output(nil)        
+      --unregist redirect output function, output goes to serial
+    end) 
+    print("Welcome to NodeMcu world.")
+end)
+
+              </code>
+            </pre>
+          </div>
+
+        </div><!--
+
+     --><div id="fr_54900e2ff6fa847bcb000051" class="fr-widget fr-text fr-wf fr_paragraph_center_12 ">
+          <div class="fr-text">
+            <p>Interfacing with sensor</p>
+            <pre class="prettyprint">
+              <code class="language-lua">
+-- read temperature with DS18B20
+t=require("ds18b20")
+t.setup(9)
+addrs=t.addrs()
+-- Total DS18B20 numbers, assume it is 2
+print(table.getn(addrs))
+-- The first DS18B20
+print(t.read(addrs[1],t.C))
+print(t.read(addrs[1],t.F))
+print(t.read(addrs[1],t.K))
+-- The second DS18B20
+print(t.read(addrs[2],t.C))
+print(t.read(addrs[2],t.F))
+print(t.read(addrs[2],t.K))
+-- Just read
+print(t.read())
+-- Just read as centigrade
+print(t.read(nil,t.C))
+-- Don't forget to release it after use
+t = nil
+ds18b20 = nil
+package.loaded["ds18b20"]=nil
+              </code>
+            </pre>
+          </div>
+
+        </div>
+
+
+      </div>
+
+
+    </div><!--
+
+ --><div id="fr_54760b777976d83acd00000f" class="fr-widget fr-container fr_tavoro ">
+
+    </div><!--
+
+ --><div id="fr_54747a88d775ef1a36000110" class="fr-widget fr-grid fr_cawase ">
+      <div id="fr_54747a9dd775ef1a3600016a" class="fr-widget fr-container fr_bugefe ">
+        <div id="fr_54747a9dd775ef1a36000172" class="fr-widget fr-grid fr_gowogu ">
+          <div id="fr_54747a9dd775ef1a36000188" class="fr-widget fr-container fr_kowafu ">
+
+          </div><!--
+
+       --><div id="fr_54747a9dd775ef1a3600017c" class="fr-widget fr-text fr-wf fr_contactustext ">
+            <div class="fr-text">Contact us</div>
+
+          </div><!--
+
+       --><div id="fr_54747a9dd775ef1a36000180" class="fr-widget fr-container fr_empty2 ">
+
+          </div><!--
+
+       --><div id="fr_547786c77976d87281000038" class="fr-widget fr-container fr_nodemcuteam ">
+            <div class="fr-widget fr-text fr-wf nodemcu-team-copyright">
+              <p>
+                 &nbsp;&nbsp;&nbsp;&nbsp;&copy; 2014-2018 NodeMcu Team
+              </p>
+            </div>
+          </div><!--
+
+       --><div id="fr_54747a9dd775ef1a36000184" class="fr-widget fr-container fr_email ">
+            <a id="fr_549242fe7af6d438a800001d" class="fr-widget fr-text fr-wf fr_emailbutton  fr-link" href="mailto:nodemcu@nodemcu.com">
+              <div class="fr-text">nodemcu@nodemcu.com</div>
+
+            </a>
+
+
+          </div><!--
+
+       --><div id="fr_547786d07976d8728100003c" class="fr-widget fr-container fr_websiteicp ">
+            <div class="fr-widget fr-text fr-wf website-icp">
+              <a href="http://www.miibeian.gov.cn" target="_blank">浙ICP备14038071号&nbsp;&nbsp;&nbsp;&nbsp;</a>
+            </div>
+
+      <div class="fr-widget fr-text fr-wf website-icp">
+        <a target="_blank" href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=33011002011205" style="display:inline-block;text-decoration:none;height:20px;line-height:20px;">
+        <img src="beiantubiao.png" style="float:left;"/>
+        <p style="float:left;height:20px;line-height:20px;margin: 0px 0px 0px 5px; color:#939393;">浙公网安备 33011002011205号</p>
+        </a>
+      </div>
+
+          </div>
+
+
+      </div>
+
+
+    </div>
+
+
+    </div>
+
+
+  </div>
+
+  <div id="footer-assets">
+    <!--[if lt IE 9]>
+                    <script type="text/javascript" src="vendor/bower/respond/respond.src.js"></script>
+                    <script type="text/javascript" src="vendor/bower/raphael/raphael.js"></script>
+                    <script type="text/javascript" src="vendor/bower/raphael-svg-import-classic/raphael-svg-import.js"></script>
+                    <script type="text/javascript" src="js/raphaelize.js"></script>
+            <![endif]-->
+  </div>
+</body>
+
+</html>

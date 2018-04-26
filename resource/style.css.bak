@@ -1,0 +1,73 @@
+body{ font-family: 'Microsoft YaHei' ,SimHei,'Ubuntu Mono', Monaco, Consolas, monospace;}
+
+.hero-unit {
+  padding-top: 20px;
+  padding-bottom: 20px;
+}
+
+#examples.row > .row {
+  margin-left: 0px;
+}
+
+#githubRibbon {
+  position: absolute;
+  top: 0;
+  right: 0;
+  border: 0;
+}
+
+h1 {
+  border-bottom-width: 1px;
+  border-bottom-style: solid;
+}
+
+.container > .row {
+  margin-bottom: 20px;
+}
+
+#header {
+  float: left;
+}
+
+#logo {
+  float: right;
+}
+
+pre, code {
+  font-family: 'Microsoft YaHei' ,SimHei,'Ubuntu Mono', Monaco, Consolas, monospace;
+  font-size: 14px;
+}
+
+pre {
+  padding: 8px !important;
+  background-color: #222;
+  color: #fff;
+  -webkit-box-shadow: 0px 1px 6px 0px #000 inset;
+  -moz-box-shadow: 0px 1px 6px 0px #000 inset;
+  box-shadow: 0px 1px 6px 0px #000 inset;
+  border-radius: 5px;
+  border: 0 !important;
+  overflow: hidden;
+  line-height: 1.2em;
+  margin: 10px 0;
+}
+
+a.button {
+  margin: 20px 5px;
+  text-decoration: none;
+  padding: 5px 10px;
+  background-color: #0054a6;
+  -webkit-box-shadow: inset 0px 0px 10px rgba(255,255,255,0.20), inset 0px 1px 0px rgba(255,255,255,0.10);
+  -moz-box-shadow: inset 0px 0px 10px rgba(255,255,255,0.20), inset 0px 1px 0px rgba(255,255,255,0.10);
+  box-shadow: inset 0px 0px 10px rgba(255,255,255,0.20), inset 0px 1px 0px rgba(255,255,255,0.10);
+  border: 1px solid #0054a6;
+  -webkit-border-radius: 3px;
+  -moz-border-radius: 3px;
+  border-radius: 3px;
+  color: #fff;
+  text-shadow: 0px -1px 0px rgba(0,0,0,0.20);
+}
+a.button:hover {
+  background-color: #004c95;
+  color: #ddd;
+}
